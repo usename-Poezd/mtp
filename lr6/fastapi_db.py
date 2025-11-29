@@ -12,7 +12,6 @@ from typing import List, Optional
 import os
 
 # Настройки БД из переменных окружения
-# Настройки БД из переменных окружения
 # Используем psycopg (совместим с Python 3.13)
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
