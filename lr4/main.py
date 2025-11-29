@@ -3,17 +3,13 @@ from functools import reduce
 import time
 from datetime import datetime
 
-# задание 1: отфильтровать четные числа из списка
+# задание 1: отфильтровать четные числа из списка (функциональный стиль)
 def filter_even_numbers(numbers):
-    # оставляем только четные
-    even = []
-    for x in numbers:
-        if x % 2 == 0:  # если четное
-            even.append(x)
-    return even
+    # используем filter и лямбда-функцию
+    return list(filter(lambda x: x % 2 == 0, numbers))
 
 
-# задание 2: факториал через reduce
+# задание 2: факториал через reduce (функциональный стиль)
 def factorial(n):
     if n < 0:
         return None
@@ -66,11 +62,11 @@ def repeat_decorator(times=1):
     # декоратор который принимает параметр
     def decorator(func):
         def wrapper(*args, **kwargs):
-            results = []
+            # используем map для выполнения функции N раз
+            results = list(map(lambda _: func(*args, **kwargs), range(times)))
+            # выводим информацию о вызовах
             for i in range(times):
                 print(f"Вызов {i + 1} из {times}")
-                result = func(*args, **kwargs)
-                results.append(result)
             return results if times > 1 else results[0]
         return wrapper
     return decorator
@@ -80,21 +76,25 @@ def repeat_decorator(times=1):
 
 # задание 1
 print("=" * 50)
-print("Задание 1: Фильтрация четных чисел")
+print("Задание 1: Фильтрация четных чисел (функциональный стиль)")
 print("=" * 50)
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 even = filter_even_numbers(numbers)
 print(f"Исходный список: {numbers}")
 print(f"Четные числа: {even}")
+
+# дополнительно: фильтрация через list comprehension
+even_lc = [x for x in numbers if x % 2 == 0]
+print(f"Четные числа (list comprehension): {even_lc}")
 print()
 
 # задание 2
 print("=" * 50)
 print("Задание 2: Факториал через reduce")
 print("=" * 50)
-for n in [0, 1, 5, 7, 10]:
-    fact = factorial(n)
-    print(f"Факториал {n} = {fact}")
+factorials = list(map(factorial, [0, 1, 5, 7, 10]))
+for i, n in enumerate([0, 1, 5, 7, 10]):
+    print(f"Факториал {n} = {factorials[i]}")
 print()
 
 # задание 3
@@ -159,3 +159,23 @@ result = square(5)
 print(f"Результат: {result}")
 print()
 
+# дополнительные примеры функционального стиля
+print("=" * 50)
+print("Дополнительные примеры функционального стиля")
+print("=" * 50)
+
+# map для преобразования
+squares = list(map(lambda x: x ** 2, [1, 2, 3, 4, 5]))
+print(f"Квадраты чисел [1,2,3,4,5]: {squares}")
+
+# filter для фильтрации
+positive = list(filter(lambda x: x > 0, [-2, -1, 0, 1, 2, 3]))
+print(f"Положительные числа [-2,-1,0,1,2,3]: {positive}")
+
+# reduce для суммирования
+sum_numbers = reduce(lambda x, y: x + y, [1, 2, 3, 4, 5])
+print(f"Сумма [1,2,3,4,5]: {sum_numbers}")
+
+# комбинация map и filter
+even_squares = list(map(lambda x: x ** 2, filter(lambda x: x % 2 == 0, range(1, 11))))
+print(f"Квадраты четных чисел от 1 до 10: {even_squares}")
