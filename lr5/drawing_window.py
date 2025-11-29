@@ -120,6 +120,9 @@ class DrawingWindow(QMainWindow):
         label = QLabel("Выберите тип фигуры и рисуйте мышью на холсте")
         layout.addWidget(label)
         
+        # Холст для рисования (создаем до кнопок, чтобы можно было на него ссылаться)
+        self.canvas = DrawingCanvas()
+        
         # Кнопки выбора типа фигуры
         from PyQt5.QtWidgets import QHBoxLayout
         button_layout = QHBoxLayout()
@@ -142,8 +145,7 @@ class DrawingWindow(QMainWindow):
         
         layout.addLayout(button_layout)
         
-        # Холст для рисования
-        self.canvas = DrawingCanvas()
+        # Добавляем холст в layout
         layout.addWidget(self.canvas)
     
     def set_shape_type(self, shape_type):
