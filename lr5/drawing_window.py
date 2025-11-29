@@ -35,6 +35,7 @@ class DrawingCanvas(QWidget):
                 'start': self.start_point,
                 'end': self.start_point
             }
+            self.update()  # Обновляем сразу при нажатии
     
     def mouseMoveEvent(self, event):
         """Обработка движения мыши."""
@@ -60,14 +61,19 @@ class DrawingCanvas(QWidget):
         for shape in self.shapes:
             self.draw_shape(painter, shape)
         
-        # Рисуем текущую фигуру
+        # Рисуем текущую фигуру (во время рисования)
         if self.current_shape:
             self.draw_shape(painter, self.current_shape)
+        
+        painter.end()
     
     def draw_shape(self, painter, shape):
         """Рисует фигуру."""
-        pen = QPen(QColor(0, 0, 255), 2)
+        # Более толстая и яркая линия
+        pen = QPen(QColor(255, 0, 0), 3)  # Красный цвет, толщина 3
         painter.setPen(pen)
+        # Без заливки для контуров
+        painter.setBrush(Qt.NoBrush)
         
         start = shape['start']
         end = shape['end']
@@ -77,16 +83,21 @@ class DrawingCanvas(QWidget):
             y = min(start.y(), end.y())
             width = abs(end.x() - start.x())
             height = abs(end.y() - start.y())
-            painter.drawRect(x, y, width, height)
+            # Рисуем только если размер больше 0
+            if width > 0 and height > 0:
+                painter.drawRect(x, y, width, height)
         
         elif shape['type'] == 'circle':
             x = min(start.x(), end.x())
             y = min(start.y(), end.y())
             width = abs(end.x() - start.x())
             height = abs(end.y() - start.y())
-            painter.drawEllipse(x, y, width, height)
+            # Рисуем только если размер больше 0
+            if width > 0 and height > 0:
+                painter.drawEllipse(x, y, width, height)
         
         elif shape['type'] == 'line':
+            # Линия рисуется всегда, даже если точки совпадают
             painter.drawLine(start, end)
     
     def clear_canvas(self):
