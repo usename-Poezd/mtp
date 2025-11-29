@@ -33,38 +33,38 @@ class MainMenu(QMainWindow):
         layout.addWidget(title)
         
         # Кнопки для запуска приложений
-        from simple_gui import SimpleWindow
-        btn1 = QPushButton("1. Простейший GUI")
-        btn1.clicked.connect(lambda: self.open_app(SimpleWindow))
+        from text_input_window import TextInputWindow
+        btn1 = QPushButton("1. Окно с текстовым полем и кнопкой")
+        btn1.clicked.connect(lambda: self.open_app(TextInputWindow))
         layout.addWidget(btn1)
         
-        from text_input_window import TextInputWindow
-        btn2 = QPushButton("2. Окно с текстовым полем")
-        btn2.clicked.connect(lambda: self.open_app(TextInputWindow))
+        from listbox_window import ListboxWindow
+        btn2 = QPushButton("2. Список (Listbox) и выбор элемента")
+        btn2.clicked.connect(lambda: self.open_app(ListboxWindow))
         layout.addWidget(btn2)
         
-        from file_dialog import FileDialogWindow
-        btn3 = QPushButton("3. Диалог выбора файла")
-        btn3.clicked.connect(lambda: self.open_app(FileDialogWindow))
+        from menu_window import MenuWindow
+        btn3 = QPushButton("3. Окно с меню (File→Exit)")
+        btn3.clicked.connect(lambda: self.open_app(MenuWindow))
         layout.addWidget(btn3)
         
-        from local_chat import ChatWindow
-        btn4 = QPushButton("4. Локальный чат")
-        btn4.clicked.connect(lambda: self.open_app(ChatWindow))
+        from drawing_window import DrawingWindow
+        btn4 = QPushButton("4. Рисование фигур мышью")
+        btn4.clicked.connect(lambda: self.open_app(DrawingWindow))
         layout.addWidget(btn4)
         
-        from clicker_game import ClickerGame
-        btn5 = QPushButton("5. Игра «Кликер»")
-        btn5.clicked.connect(lambda: self.open_app(ClickerGame))
+        from currency_converter import CurrencyConverter
+        btn5 = QPushButton("5. Конвертер валют")
+        btn5.clicked.connect(lambda: self.open_app(CurrencyConverter))
         layout.addWidget(btn5)
         
         # Информация
         info = QLabel("\nДля запуска отдельного приложения:\n"
-                     "python simple_gui.py\n"
                      "python text_input_window.py\n"
-                     "python file_dialog.py\n"
-                     "python local_chat.py\n"
-                     "python clicker_game.py")
+                     "python listbox_window.py\n"
+                     "python menu_window.py\n"
+                     "python drawing_window.py\n"
+                     "python currency_converter.py")
         info.setStyleSheet("font-size: 10px; color: gray;")
         layout.addWidget(info)
     

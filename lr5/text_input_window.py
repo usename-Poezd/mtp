@@ -4,6 +4,7 @@
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QLabel, QPushButton, 
                             QVBoxLayout, QWidget, QLineEdit, QTextEdit)
+import sys
 
 
 class TextInputWindow(QMainWindow):
@@ -33,6 +34,7 @@ class TextInputWindow(QMainWindow):
         # Поле ввода
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Введите текст здесь...")
+        self.input_field.returnPressed.connect(self.show_text)
         layout.addWidget(self.input_field)
         
         # Кнопка вывода
@@ -67,10 +69,10 @@ class TextInputWindow(QMainWindow):
 
 def main():
     """Запуск приложения."""
-    app = QApplication([])
+    app = QApplication(sys.argv)
     window = TextInputWindow()
     window.show()
-    app.exec_()
+    sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
