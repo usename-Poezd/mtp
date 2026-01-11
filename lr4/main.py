@@ -1,6 +1,5 @@
 # лаба 4 функциональное программирование
 from functools import reduce
-import time
 from datetime import datetime
 
 # задание 1: отфильтровать четные числа из списка (функциональный стиль)
@@ -17,7 +16,6 @@ def factorial(n):
         return 1
     # используем reduce для умножения чисел от 1 до n
     return reduce(lambda x, y: x * y, range(1, n + 1))
-
 
 # задание 3: декоратор для логирования вызова функции
 def log_decorator(func):
@@ -83,9 +81,6 @@ even = filter_even_numbers(numbers)
 print(f"Исходный список: {numbers}")
 print(f"Четные числа: {even}")
 
-# дополнительно: фильтрация через list comprehension
-even_lc = [x for x in numbers if x % 2 == 0]
-print(f"Четные числа (list comprehension): {even_lc}")
 print()
 
 # задание 2

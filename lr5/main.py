@@ -76,6 +76,10 @@ class MainMenu(QMainWindow):
 
 def main():
     """Запуск главного меню."""
+    import os
+    # Подавляем предупреждения Wayland
+    os.environ.setdefault('QT_QPA_PLATFORM', 'xcb')
+    
     app = QApplication(sys.argv)
     window = MainMenu()
     window.show()
